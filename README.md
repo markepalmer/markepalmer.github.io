@@ -9,6 +9,25 @@ resume PDF. It forwards to wherever the site is actually hosted, which today is 
 https://resume-chatbot-328203120319.us-east1.run.app
 ```
 
+## Currently offline, since 2026-09-02
+
+**`index.html` is serving an offline placeholder rather than redirecting.** The Cloud Run
+service is still deployed and unchanged; what changed is that `allUsers` no longer holds
+`roles/run.invoker` on it, so an anonymous visitor gets a 403 and the redirect would have
+forwarded people into that error.
+
+Republishing is one command, run against the `Website` repo's project:
+
+```
+gcloud run services add-iam-policy-binding resume-chatbot \
+  --project=elliot-resume-site-1 --region=us-east1 \
+  --member=allUsers --role=roles/run.invoker
+```
+
+Then restore the redirect here, per the section below. Do both, in that order: the
+placeholder is what keeps a live link from pointing at a 403, so it should outlive the
+outage by a moment rather than the other way round.
+
 ## Why this exists
 
 A Cloud Run hostname is derived from the service name, project, and region. Change any of
