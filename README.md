@@ -3,10 +3,10 @@
 A permanent redirect to my resume site, nothing else.
 
 `https://markepalmer.github.io` is the address that goes on applications, LinkedIn, and my
-resume PDF. It forwards to wherever the site is actually hosted, which today is Cloud Run:
+resume PDF. It forwards to the site's own domain, served from Cloud Run through a domain mapping:
 
 ```
-https://resume-chatbot-328203120319.us-east1.run.app
+https://elliot.epautopilot.com
 ```
 
 ## Why this exists
@@ -16,6 +16,9 @@ the three, or leave Cloud Run, and every link already sitting in a sent applicat
 with no way to redirect from a hostname I no longer control. This repo is the stable
 indirection: if the hosting moves, I edit one URL here and every link ever sent still lands
 in the right place.
+
+Since 2026-10-07 the custom domain is the address going out on new applications. This redirect
+stays up so links in applications already sent still land.
 
 ## Changing the target
 
